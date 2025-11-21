@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Salary Prediction</title>
+</head>
+<body style="font-family: Arial; margin: 50px;">
+
+    <h2>Salary Prediction App</h2>
+
+    <label>Enter Experience (Years):</label>
+    <input type="number" id="exp" step="0.1" />
+
+    <button onclick="predictSalary()">Predict</button>
+
+    <h3 id="output"></h3>
+
+    <script>
+        async function predictSalary() {
+            let exp = document.getElementById("exp").value;
+
+            let response = await fetch(`http://127.0.0.1:8000/predict/${exp}`);
+            let data = await response.json();
+
+            document.getElementById("output").innerHTML =
+                "Predicted Salary: " + data.predicted_salary;
+        }
+    </script>
+
+</body>
+</html>
